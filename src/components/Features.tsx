@@ -107,7 +107,12 @@ const Features: React.FC = () => {
                                     <div className="w-24 h-24 rounded-full bg-gradient-to-br from-[#d4af77] to-[#b88a4a] flex items-center justify-center animate-pulse">
                                       <Brain className="w-12 h-12" />
                                     </div>
-                                    <div className="absolute inset-0 rounded-full blur-xl" style={{ background: "radial-gradient(circle at center, rgba(212,175,119,0.08), transparent 40%)" }} />
+                                    <div
+                                      className="absolute inset-0 rounded-full blur-xl"
+                                      style={{
+                                        background: "radial-gradient(circle at center, rgba(212,175,119,0.08), transparent 40%)"
+                                      }}
+                                    />
                                   </div>
                                   <p className="text-sm text-gray-400 mt-4">Recommend highest potential leads first</p>
                                 </div>
@@ -172,7 +177,7 @@ const Features: React.FC = () => {
                                   { type: "success", title: "Invoice paid", time: "3 hours ago", color: "green" },
                                   { type: "info", title: "New performance report", time: "5 hours ago", color: "purple" }
                                 ].map((alert, i) => {
-                                  const classes = colorMap[alert.color] || colorMap.default;
+                                  const classes = colorMap[alert.color as keyof typeof colorMap] || colorMap.default;
                                   return (
                                     <div key={i} className={`${classes.bg} ${classes.border} rounded-xl p-4 backdrop-blur-sm`}>
                                       <div className="flex items-start justify-between">
@@ -222,7 +227,7 @@ const Features: React.FC = () => {
                                   ].map((item, i) => (
                                     <div key={i} className="flex items-center justify-between text-sm">
                                       <div className="flex items-center gap-2">
-                                        <div className={`w-3 h-3 rounded-full ${item.color === "blue" ? "bg-[#d4af77]" : item.color === "purple" ? "bg-[#c89d5f]" : "bg-green-400"}`}></div>
+                                        <div className={`${item.color === "blue" ? "w-3 h-3 rounded-full bg-[#d4af77]" : item.color === "purple" ? "w-3 h-3 rounded-full bg-[#c89d5f]" : "w-3 h-3 rounded-full bg-green-400"}`}></div>
                                         <span className="text-gray-400">{item.label}</span>
                                       </div>
                                       <span className="font-semibold">{item.value}</span>
@@ -237,8 +242,9 @@ const Features: React.FC = () => {
                     </div>
                   </div>
                 </div>
-              );
-            })}
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

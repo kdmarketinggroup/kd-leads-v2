@@ -37,9 +37,6 @@ const OnboardingForm: React.FC = () => {
 
           <div className="fade-up">
             <div className="inline-flex items-center gap-4 mb-6">
-              <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-pink-500 to-rose-500">
-                <Heart className="w-7 h-7 text-white" />
-              </div>
               <div className="fade-up mb-6">
   <p className="text-sm text-[#d4af77] font-semibold tracking-wide mb-2">
     GET STARTED
@@ -107,7 +104,7 @@ const OnboardingForm: React.FC = () => {
                     <div className="p-6 text-center text-gray-300">
                       Please enable JavaScript to complete the onboarding form. If you cannot, email{" "}
                       <a href="mailto:hello@kdmarketinggroup.com" className="text-[#d4af77] underline">
-                        hello@kdmarketinggroup.com
+                        sales@kdmarketinggroup.com
                       </a>{" "}
                       and we will help you get set up.
                     </div>

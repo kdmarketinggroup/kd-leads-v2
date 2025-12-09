@@ -40,12 +40,19 @@ const OnboardingForm: React.FC = () => {
               <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-pink-500 to-rose-500">
                 <Heart className="w-7 h-7 text-white" />
               </div>
-              <div>
-                <p className="text-sm text-pink-400 font-semibold">GET STARTED</p>
-                <h2 className="text-3xl lg:text-4xl font-bold mt-2">
-                  Onboard to KD Leads and stop losing valuable leads
-                </h2>
-              </div>
+              <div className="fade-up mb-6">
+  <p className="text-sm text-[#d4af77] font-semibold tracking-wide mb-2">
+    GET STARTED
+  </p>
+
+  <h2 className="text-3xl lg:text-4xl font-bold leading-tight">
+    Onboard to{" "}
+    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d4af77] to-[#c89d5f]">
+      KD Leads
+    </span>{" "}
+    and stop losing valuable leads
+  </h2>
+</div>
             </div>
 
             <p className="text-lg text-gray-300 mb-6 max-w-xl">

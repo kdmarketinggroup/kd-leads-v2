@@ -1,82 +1,118 @@
-import React from 'react';
-import { Heart, Users, Globe } from 'lucide-react';
+import React, { useEffect, useRef } from "react";
+import { Heart } from "lucide-react";
 
-const Charity = () => {
+const OnboardingForm: React.FC = () => {
+  const scriptLoadedRef = useRef(false);
+  const iframeRef = useRef<HTMLIFrameElement | null>(null);
+
+  useEffect(() => {
+
+    if (scriptLoadedRef.current) return;
+    scriptLoadedRef.current = true;
+
+    const src = "https://site.kdmarketinggroup.com/js/form_embed.js";
+    if (!document.querySelector(`script[src="${src}"]`)) {
+      const s = document.createElement("script");
+      s.src = src;
+      s.async = true;
+      s.defer = true;
+      document.body.appendChild(s);
+    }
+
+    const iframe = iframeRef.current;
+    if (iframe) {
+
+      iframe.setAttribute("aria-label", "KD Leads onboarding form");
+    }
+
+    return () => {};
+  }, []);
+
   return (
-    <section className="py-32 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-[#d4af77]/10 via-[#c89d5f]/5 to-[#c89d5f]/10"></div>
+    <section className="py-24 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-[#d4af77]/10 via-[#c89d5f]/5 to-[#c89d5f]/10 pointer-events-none" />
 
       <div className="container mx-auto px-6 lg:px-12">
-        <div className="max-w-5xl mx-auto">
-          <div className="relative bg-gradient-to-br from-gray-900/80 to-black/80 backdrop-blur-sm border border-[#d4af77]/20 rounded-[3rem] p-12 lg:p-16 fade-up">
-            <div className="absolute inset-0 bg-gradient-to-br from-[#d4af77]/10 to-[#c89d5f]/10 rounded-[3rem] blur-3xl"></div>
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
 
-            <div className="relative">
-              <div className="text-center mb-12">
-                <div className="inline-flex items-center justify-center w-24 h-24 rounded-3xl bg-gradient-to-br from-pink-500 to-rose-500 mb-6">
-                  <Heart className="w-12 h-12" fill="currentColor" />
-                </div>
-
-                <h2 className="text-4xl lg:text-5xl font-bold mb-6">
-                  Building Wealth While <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-rose-400">Making a Difference</span>
+          <div className="fade-up">
+            <div className="inline-flex items-center gap-4 mb-6">
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br from-pink-500 to-rose-500">
+                <Heart className="w-7 h-7 text-white" />
+              </div>
+              <div>
+                <p className="text-sm text-pink-400 font-semibold">GET STARTED</p>
+                <h2 className="text-3xl lg:text-4xl font-bold mt-2">
+                  Onboard to KD Leads and stop losing valuable leads
                 </h2>
-
-                <p className="text-xl text-gray-400 leading-relaxed max-w-3xl mx-auto mb-8">
-                  For every premium subscription, we donate 10% to financial literacy programs in underserved communities.
-                  Your success helps create opportunities for others to achieve financial freedom.
-                </p>
               </div>
+            </div>
 
-              <div className="grid md:grid-cols-3 gap-8 mb-12">
-                {[
-                  {
-                    icon: Users,
-                    stat: "50,000+",
-                    label: "Students Educated",
-                    description: "Free financial literacy courses provided"
-                  },
-                  {
-                    icon: Globe,
-                    stat: "25",
-                    label: "Countries Reached",
-                    description: "Global impact across continents"
-                  },
-                  {
-                    icon: Heart,
-                    stat: "$2.5M+",
-                    label: "Donated",
-                    description: "To educational programs worldwide"
-                  }
-                ].map((item, index) => {
-                  const Icon = item.icon;
-                  return (
-                    <div key={index} className="text-center group">
-                      <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-500/20 to-rose-500/20 border border-pink-500/30 mb-4 group-hover:scale-110 transition-transform duration-300">
-                        <Icon className="w-8 h-8 text-pink-400" />
-                      </div>
-                      <p className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-rose-400 mb-2">
-                        {item.stat}
-                      </p>
-                      <p className="font-semibold mb-2">{item.label}</p>
-                      <p className="text-sm text-gray-500">{item.description}</p>
+            <p className="text-lg text-gray-300 mb-6 max-w-xl">
+              Fill out this quick onboarding form so we can connect your account, set up lead capture, and configure your automated follow up sequences. KD Leads will help you centralize your leads route high potential prospects to the right rep and start sending invoices from inside the app.
+            </p>
+
+            <ul className="space-y-3 text-gray-400 mb-6">
+              <li>• Connect your lead sources in minutes</li>
+              <li>• Turn website visitors into contacts automatically</li>
+              <li>• Automate follow ups and invoice from one place</li>
+            </ul>
+
+            <p className="text-sm text-gray-500">
+              By completing this form our team can prepare your workspace and recommend the best onboarding plan for your business.
+            </p>
+          </div>
+
+          <div className="fade-up delay-200">
+            <div className="relative bg-gradient-to-br from-gray-900/80 to-black/80 backdrop-blur-sm border border-[#d4af77]/20 rounded-2xl p-1 shadow-2xl">
+              <div className="bg-[#0a0a0f] rounded-xl overflow-hidden" style={{ minHeight: 520 }}>
+
+                <div style={{ width: "100%", height: "100%", minHeight: 520 }}>
+                  <iframe
+                    ref={iframeRef}
+                    src="https://site.kdmarketinggroup.com/widget/form/0SFoS45fL20iFTFQzWcX"
+                    title="Kd Leads Onboarding Form"
+                    id="inline-0SFoS45fL20iFTFQzWcX"
+                    data-layout='{"id":"INLINE"}'
+                    data-trigger-type="alwaysShow"
+                    data-trigger-value=""
+                    data-activation-type="alwaysActivated"
+                    data-activation-value=""
+                    data-deactivation-type="neverDeactivate"
+                    data-deactivation-value=""
+                    data-form-name="Kd Leads Form"
+                    data-height="852"
+                    data-layout-iframe-id="inline-0SFoS45fL20iFTFQzWcX"
+                    data-form-id="0SFoS45fL20iFTFQzWcX"
+                    style={{
+                      width: "100%",
+                      height: "852px",
+                      border: "none",
+                      borderRadius: 6,
+                      display: "block",
+                      background: "transparent"
+                    }}
+                    loading="lazy"
+                    aria-hidden={false}
+                  ></iframe>
+
+                  <noscript>
+                    <div className="p-6 text-center text-gray-300">
+                      Please enable JavaScript to complete the onboarding form. If you cannot, email{" "}
+                      <a href="mailto:hello@kdmarketinggroup.com" className="text-[#d4af77] underline">
+                        hello@kdmarketinggroup.com
+                      </a>{" "}
+                      and we will help you get set up.
                     </div>
-                  );
-                })}
-              </div>
-
-              <div className="text-center">
-                <div className="inline-block px-6 py-3 rounded-full bg-pink-500/10 border border-pink-500/20 backdrop-blur-sm">
-                  <p className="text-sm text-pink-400">
-                    <span className="font-bold">Together</span>, we're creating a world where everyone has access to financial education
-                  </p>
+                  </noscript>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </div> 
     </section>
   );
 };
 
-export default Charity;
+export default OnboardingForm;

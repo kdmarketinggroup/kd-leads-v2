@@ -111,31 +111,49 @@ const Hero = () => {
                       </div>
 
                       <div className="space-y-3">
-                        {[
-                          { name: 'Hot Leads', value: '4,240', change: '+18%' },
-                          { name: 'Warm Prospects', value: '5,890', change: '+25%' },
-                          { name: 'New Contacts', value: '2,717', change: '+45%' }
-                        ].map((item, i) => (
-                          <div key={i} className="bg-white/5 border border-white/10 rounded-xl p-4 backdrop-blur-sm">
-                            <div className="flex justify-between items-center">
-                              <div>
-                                <p className="text-sm font-medium">{item.name}</p>
-                                <p className="text-xs text-gray-500 mt-1">{item.value} leads</p>
-                              </div>
-                              <span className="text-green-400 text-sm">{item.change}</span>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+  {[
+    { name: 'Hot Leads', value: '4,240', change: '+18%' },
+    { name: 'Warm Prospects', value: '5,890', change: '+25%' },
+    { name: 'New Contacts', value: '2,717', change: '+45%' }
+  ].map((item, i) => (
+    <div
+      key={i}
+      className="bg-white/5 border border-white/10 rounded-xl p-4 backdrop-blur-sm"
+    >
+      <div className="flex justify-between items-center">
+        <div>
+          <p className="text-sm font-medium">{item.name}</p>
+          <p className="text-xs text-gray-500 mt-1">{item.value} leads</p>
         </div>
+        <span className="text-green-400 text-sm">{item.change}</span>
       </div>
-    </section>
+    </div>
+  ))}
+
+  {/* --- Analytics Chart Added Below --- */}
+  <div className="mt-4 bg-white/5 border border-white/10 rounded-xl p-4 backdrop-blur-sm">
+    <p className="text-sm font-medium mb-3">Lead Growth (Last 7 Days)</p>
+
+    <div className="h-24 w-full flex items-end gap-2">
+      {[40, 60, 45, 80, 90, 70, 100].map((h, i) => (
+        <div
+          key={i}
+          className="bg-green-400/70 rounded w-4"
+          style={{ height: `${h}%` }}
+        ></div>
+      ))}
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
   );
 };
 

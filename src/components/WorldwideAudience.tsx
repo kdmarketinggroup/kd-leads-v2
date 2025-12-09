@@ -1,41 +1,45 @@
-import React from 'react';
-import { Globe, Users, Award } from 'lucide-react';
+import React from "react";
+import { Globe, Users, Award } from "lucide-react";
 
 const testimonials = [
   {
     image: "person1",
-    quote: "I went from living paycheck to paycheck to having a six-figure investment portfolio in just 3 years.",
-    author: "Marcus Johnson",
-    location: "New York, USA",
-    result: "+$127K"
+    quote:
+      "KD Leads cleaned up our sales chaos — we went from scattered spreadsheets to a predictable pipeline. Closed 42 high-value deals in the first 6 months.",
+    author: "Amit Sharma",
+    location: "Bengaluru, India",
+    result: "+42 deals"
   },
   {
     image: "person2",
-    quote: "This app gave me the confidence to finally start investing. Now I'm outperforming my financial advisor.",
-    author: "Sophie Laurent",
-    location: "Paris, France",
-    result: "+€89K"
+    quote:
+      "Automated follow-ups saved our reps hours every week. Our response rate jumped and we recovered dozens of lost opportunities.",
+    author: "Olivia Bennett",
+    location: "London, UK",
+    result: "+38% replies"
   },
   {
     image: "person3",
-    quote: "The AI recommendations are scary accurate. It's like having a personal wealth manager in my pocket.",
-    author: "Raj Patel",
-    location: "Mumbai, India",
-    result: "+₹5.2M"
+    quote:
+      "Invoicing and payment collection built into the app made closing so much smoother — cashflow improved almost immediately.",
+    author: "Carlos Mendes",
+    location: "Lisbon, Portugal",
+    result: "+$46K revenue"
   },
   {
     image: "person4",
-    quote: "I retired 5 years earlier than planned, all thanks to the strategies I learned through this app.",
-    author: "Elena Rodriguez",
-    location: "Barcelona, Spain",
-    result: "+€156K"
+    quote:
+      "The dashboard and performance reports let me see pipeline health at a glance. Our forecasting is actually useful now.",
+    author: "Priya Nair",
+    location: "Mumbai, India",
+    result: "Forecast ✓"
   }
 ];
 
-const WorldwideAudience = () => {
+const WorldwideAudience: React.FC = () => {
   return (
     <section className="py-32 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-[#d4af77]/10 via-transparent to-[#c89d5f]/10"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-[#d4af77]/10 via-transparent to-[#c89d5f]/10" />
 
       <div className="container mx-auto px-6 lg:px-12">
         <div className="text-center mb-20 fade-up">
@@ -45,10 +49,11 @@ const WorldwideAudience = () => {
           </div>
 
           <h2 className="text-4xl lg:text-6xl font-bold mb-6">
-            Trusted by <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d4af77] to-[#c89d5f]">Millions</span> Across the Globe
+            Trusted by <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d4af77] to-[#c89d5f]">businesses</span> across the globe
           </h2>
+
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            Real people. Real results. Real financial transformation happening every single day.
+            Real teams using KD Leads to capture more leads, automate follow-ups, invoice faster, and close deals with confidence.
           </p>
         </div>
 
@@ -56,11 +61,13 @@ const WorldwideAudience = () => {
           {testimonials.map((testimonial, index) => (
             <div key={index} className="fade-up group" style={{ animationDelay: `${index * 100}ms` }}>
               <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-gray-900/80 to-black/80 backdrop-blur-sm border border-[#d4af77]/20 hover:border-[#d4af77]/40 transition-all duration-300 h-full">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#d4af77]/20 via-transparent to-[#c89d5f]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 bg-gradient-to-br from-[#d4af77]/20 via-transparent to-[#c89d5f]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
 
                 <div className="relative p-6">
                   <div className="w-full aspect-square rounded-2xl bg-gradient-to-br from-[#d4af77]/20 to-[#c89d5f]/20 mb-4 flex items-center justify-center">
-                    <Users className="w-16 h-16 text-[#d4af77]/40" />
+                    <div className="w-16 h-16 rounded-xl bg-black/30 flex items-center justify-center text-sm text-[#d4af77] font-semibold">
+                      {testimonial.author.split(" ").map(n => n[0]).slice(0,2).join("")}
+                    </div>
                   </div>
 
                   <div className="mb-4">
@@ -69,7 +76,7 @@ const WorldwideAudience = () => {
                     </div>
                   </div>
 
-                  <p className="text-gray-300 mb-4 leading-relaxed">"{testimonial.quote}"</p>
+                  <p className="text-gray-300 mb-4 leading-relaxed">“{testimonial.quote}”</p>
 
                   <div className="pt-4 border-t border-white/10">
                     <p className="font-semibold text-white">{testimonial.author}</p>
@@ -77,8 +84,8 @@ const WorldwideAudience = () => {
                   </div>
 
                   <div className="mt-4">
-                    <div className="h-px bg-gradient-to-r from-[#d4af77]/50 via-[#c89d5f]/50 to-[#d4af77]/50"></div>
-                    <p className="text-xs text-center text-gray-600 mt-2 italic">Verified User</p>
+                    <div className="h-px bg-gradient-to-r from-[#d4af77]/50 via-[#c89d5f]/50 to-[#d4af77]/50" />
+                    <p className="text-xs text-center text-gray-600 mt-2 italic">Verified KD Leads user</p>
                   </div>
                 </div>
               </div>
@@ -90,7 +97,7 @@ const WorldwideAudience = () => {
           {[
             { icon: Globe, stat: "120+", label: "Countries" },
             { icon: Users, stat: "10M+", label: "Active Users" },
-            { icon: Award, stat: "#1", label: "Finance App" }
+            { icon: Award, stat: "#1", label: "Sales & CRM App" }
           ].map((item, index) => {
             const Icon = item.icon;
             return (

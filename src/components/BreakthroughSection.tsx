@@ -44,17 +44,17 @@ const BreakthroughSection: React.FC = () => {
           <div className="grid md:grid-cols-3 gap-8 mt-16">
             {[
               {
-                number: "156 percent",
+                number: "156%",
                 label: "Average pipeline growth",
                 sublabel: "Measured in the first 12 months"
               },
               {
-                number: "10 million plus",
+                number: "10M+",
                 label: "Active users",
                 sublabel: "Trusted by teams in over 120 countries"
               },
               {
-                number: "4.9 out of 5",
+                number: "4.9/5",
                 label: "User rating",
                 sublabel: "Over 50 thousand reviews"
               }

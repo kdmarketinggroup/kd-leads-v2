@@ -14,14 +14,14 @@ const testimonials = [
       "We recovered lost opportunities because follow ups are now automatic and timely. Our reply rate improved and our small business finally has a simple CRM that actually helps us grow.",
     author: "Olivia Bennett",
     location: "London, United Kingdom",
-    result: "38 percent more replies"
+    result: "38% more replies"
   },
   {
     quote:
       "Sending invoices from inside the app sped up payments and improved cash flow. Integrating invoices with lead records made reconciliation effortless and our accounting team loves it.",
     author: "Carlos Mendes",
     location: "Lisbon, Portugal",
-    result: "46k additional revenue"
+    result: "46k+ revenue"
   },
   {
     quote:

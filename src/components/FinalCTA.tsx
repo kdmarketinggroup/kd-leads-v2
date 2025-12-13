@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const FEATURES = [
@@ -17,13 +18,13 @@ const FEATURES = [
 
 const FinalCTA = () => {
   const sliderRef = useRef<HTMLDivElement>(null);
-  const [progress, setProgress] = useState(0);
-  const [activeIndex, setActiveIndex] = useState(0);
-
   const navigate = useNavigate();
   const location = useLocation();
 
-  /* ---------------- Scroll + Active Card ---------------- */
+  const [progress, setProgress] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  /* ---------------- Scroll tracking ---------------- */
   useEffect(() => {
     const slider = sliderRef.current;
     if (!slider) return;
@@ -40,10 +41,9 @@ const FinalCTA = () => {
     return () => slider.removeEventListener("scroll", onScroll);
   }, []);
 
-  /* ---------------- Deep link auto-scroll ---------------- */
+  /* ---------------- Deep link support ---------------- */
   useEffect(() => {
-    const slider = sliderRef.current;
-    if (!slider) return;
+    if (!sliderRef.current) return;
 
     const slug = location.pathname.split("/features/")[1];
     if (!slug) return;
@@ -51,6 +51,7 @@ const FinalCTA = () => {
     const index = FEATURES.findIndex(f => f.slug === slug);
     if (index === -1) return;
 
+    const slider = sliderRef.current;
     const cardWidth = slider.scrollWidth / FEATURES.length;
 
     slider.scrollTo({
@@ -61,9 +62,21 @@ const FinalCTA = () => {
     setActiveIndex(index);
   }, [location.pathname]);
 
+  /* ---------------- Arrow navigation ---------------- */
+  const scrollByCard = (dir: "left" | "right") => {
+    if (!sliderRef.current) return;
+
+    const cardWidth = sliderRef.current.scrollWidth / FEATURES.length;
+
+    sliderRef.current.scrollBy({
+      left: dir === "left" ? -cardWidth : cardWidth,
+      behavior: "smooth"
+    });
+  };
+
   return (
     <section className="relative py-32 overflow-hidden">
-      {/* Progress Bar */}
+      {/* Progress bar */}
       <div className="absolute top-0 left-0 w-full h-1 bg-white/5">
         <motion.div
           className="h-1 bg-gradient-to-r from-[#d4af77] to-[#c89d5f]"
@@ -71,19 +84,34 @@ const FinalCTA = () => {
         />
       </div>
 
-      {/* Heading */}
+      {/* Header */}
       <div className="container mx-auto px-6 lg:px-12 text-center mb-20">
         <p className="text-sm font-semibold text-[#d4af77] mb-3">FEATURES</p>
         <h2 className="text-4xl lg:text-6xl font-bold mb-6">
-          Everything you need to{" "}
+          Explore everything that powers{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d4af77] to-[#c89d5f]">
-            run and grow your business
+            KD Leads
           </span>
         </h2>
         <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-          From estimates and invoicing to automation, reviews, and growth tools.
+          Swipe, scroll, or click through each feature that helps you close faster and grow smarter.
         </p>
       </div>
+
+      {/* Arrow buttons */}
+      <button
+        onClick={() => scrollByCard("left")}
+        className="hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-black/60 border border-white/10 items-center justify-center hover:bg-black transition"
+      >
+        <ChevronLeft />
+      </button>
+
+      <button
+        onClick={() => scrollByCard("right")}
+        className="hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-black/60 border border-white/10 items-center justify-center hover:bg-black transition"
+      >
+        <ChevronRight />
+      </button>
 
       {/* Carousel */}
       <div
@@ -108,10 +136,9 @@ const FinalCTA = () => {
                     ? "0 0 40px rgba(212,175,119,0.35)"
                     : "none"
               }}
-              transition={{ type: "spring", stiffness: 180, damping: 24 }}
+              transition={{ type: "spring", stiffness: 200, damping: 25 }}
               className="bg-gradient-to-br from-gray-900/80 to-black/80 border border-white/10 rounded-3xl overflow-hidden"
             >
-              {/* Image */}
               <div className="relative h-64 bg-white/5">
                 <img
                   src={item.img}

@@ -59,9 +59,9 @@ const HowItWorks: React.FC = () => {
             return (
               <div
                 key={index}
-                className={`grid lg:grid-cols-2 gap-16 items-center`}
+                className="grid lg:grid-cols-2 gap-16 items-center"
               >
-                {/* Text */}
+                {/* TEXT */}
                 <div className={`fade-up ${isEven ? "lg:order-1" : "lg:order-2"}`}>
                   <div className="inline-flex items-center gap-4 mb-6">
                     <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#d4af77] to-[#b88a4a] flex items-center justify-center">
@@ -80,29 +80,31 @@ const HowItWorks: React.FC = () => {
                   </p>
                 </div>
 
-                {/* Mockup (ONLY SIZE ADJUSTED) */}
+                {/* MOCKUP — SIZE FIXED ONLY */}
                 <div className={`fade-up delay-200 ${isEven ? "lg:order-2" : "lg:order-1"}`}>
                   <div className="relative flex justify-center">
                     {/* Glow */}
                     <div className="absolute inset-0 bg-gradient-to-br from-[#d4af77]/15 to-[#c89d5f]/15 rounded-[3rem] blur-2xl" />
 
-                    {/* Phone */}
-                    <div className="relative bg-gradient-to-br from-gray-900 to-black p-2 rounded-[3rem] shadow-2xl border border-white/10
-                                    max-w-[320px] lg:max-w-[360px] scale-[0.9] lg:scale-100 transition-transform">
-                      <div className="bg-[#0a0a0f] rounded-[2.5rem] overflow-hidden">
-                        <div className="relative aspect-[9/19]">
-                          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-5 bg-black rounded-b-3xl z-20" />
+                    {/* SCALE WRAPPER (same as Hero) */}
+                    <div className="relative scale-[0.8] lg:scale-[0.85] origin-top transition-transform">
+                      <div className="bg-gradient-to-br from-gray-900 to-black p-2 rounded-[3rem] shadow-2xl border border-white/10 w-[320px]">
+                        <div className="bg-[#0a0a0f] rounded-[2.5rem] overflow-hidden">
+                          <div className="relative h-[560px]">
+                            {/* Notch */}
+                            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-5 bg-black rounded-b-3xl z-20" />
 
-                          {/* CONTENT INSIDE – UNCHANGED */}
-                          <div className="p-6 pt-10 h-full flex items-center justify-center text-gray-400">
-                            App Preview
+                            {/* CONTENT — NOW VISIBLE */}
+                            <div className="p-6 pt-10 h-full flex items-center justify-center text-gray-400">
+                              App Preview
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
+
                   </div>
                 </div>
-
               </div>
             );
           })}

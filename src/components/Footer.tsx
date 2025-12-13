@@ -18,7 +18,7 @@ const Footer = () => {
                 alt="KD Leads Logo"
                 className="w-10 h-10 rounded-xl object-contain"
               />
-              <h3 className="text-2xl font-bold">KD Leads</h3>
+              <h3 className="text-2xl font-bold">KD Lead</h3>
             </div>
 
             <p className="text-gray-400 leading-relaxed">
@@ -74,11 +74,11 @@ const Footer = () => {
 
             {/* Copyright */}
             <p className="text-sm text-gray-500 text-left lg:text-right">
-              © 2024 KD Leads. All rights reserved.
+              © 2024 KD Marketing Group. All rights reserved.
             </p>
           </div>
         </div>
-
+{/* Made with love by AJ - instagram.com/Taggingmydad */}
         {/* Divider */}
         <div className="mt-12 h-px bg-white/10" />
       </div>

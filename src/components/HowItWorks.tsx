@@ -94,15 +94,92 @@ const HowItWorks: React.FC = () => {
                             {/* Notch */}
                             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-5 bg-black rounded-b-3xl z-20" />
 
-                            {/* CONTENT — NOW VISIBLE */}
-                            <div className="p-6 pt-10 h-full flex items-center justify-center text-gray-400">
-                              App Preview
+                            <div className="p-6 pt-10 h-full flex flex-col">
+                            <div className="flex-1 flex items-center justify-center">
+                              <div
+                                className={`w-full ${
+                                  index === 0
+                                    ? "space-y-4"
+                                    : index === 1
+                                    ? "text-center"
+                                    : index === 2
+                                    ? "space-y-3"
+                                    : "space-y-4"
+                                }`}
+                              >
+                                {index === 0 && (
+                                  <>
+                                    <div className="bg-gradient-to-r from-[#d4af77]/20 to-[#c89d5f]/20 border border-[#d4af77]/30 rounded-2xl p-6 backdrop-blur-sm">
+                                      <p className="text-sm text-gray-400 mb-2">Connected sources</p>
+                                      <p className="text-2xl font-bold">Website forms and CRM linked</p>
+                                    </div>
+                                    <div className="bg-white/5 border border-white/10 rounded-2xl p-4">
+                                      <p className="text-xs text-gray-500">Secure data storage</p>
+                                      <p className="text-xl font-bold mt-1">Bank level encryption</p>
+                                    </div>
+                                  </>
+                                )}
+
+                                {index === 1 && (
+                                  <div className="space-y-6">
+                                    <div className="relative">
+                                      <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-[#d4af77] to-[#b88a4a] flex items-center justify-center animate-pulse">
+                                        <Brain className="w-16 h-16" />
+                                      </div>
+                                      <div className="absolute inset-0 bg-gradient-to-br from-[#d4af77]/20 to-[#c89d5f]/20 rounded-full blur-2xl"></div>
+                                    </div>
+                                    <p className="text-lg font-semibold">AI lead scoring in real time</p>
+                                    <div className="w-full bg-white/10 rounded-full h-2">
+                                      <div className="bg-gradient-to-r from-[#d4af77] to-[#b88a4a] h-2 rounded-full animate-pulse" style={{ width: "72%" }}></div>
+                                    </div>
+                                  </div>
+                                )}
+
+                                {index === 2 && (
+                                  <>
+                                    <div className="bg-gradient-to-br from-[#d4af77]/20 to-[#c89d5f]/20 border border-[#d4af77]/30 rounded-2xl p-4 backdrop-blur-sm">
+                                      <div className="flex items-center justify-between">
+                                        <div>
+                                          <p className="text-sm font-medium">Suggested sequence</p>
+                                          <p className="text-xs text-gray-500 mt-1">Email then call</p>
+                                        </div>
+                                        <span className="text-green-400 font-bold">Auto send</span>
+                                      </div>
+                                    </div>
+                                    <div className="bg-white/5 border border-white/10 rounded-2xl p-4">
+                                      <div className="flex items-center justify-between">
+                                        <div>
+                                          <p className="text-sm font-medium">One click task</p>
+                                          <p className="text-xs text-gray-500 mt-1">Assign to rep</p>
+                                        </div>
+                                        <span className="text-green-400 font-bold">Done</span>
+                                      </div>
+                                    </div>
+                                  </>
+                                )}
+
+                                {index === 3 && (
+                                  <>
+                                    <div className="text-center mb-6">
+                                      <p className="text-gray-400 text-sm mb-2">Real time conversion tracking</p>
+                                      <h3 className="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#d4af77] to-[#c89d5f]">$68,940</h3>
+                                      <p className="text-green-400 text-sm mt-2 flex items-center justify-center gap-1">
+                                        <TrendingUp className="w-4 h-4" />
+                                        44 percent growth
+                                      </p>
+                                    </div>
+                                    <div className="bg-gradient-to-br from-green-500/20 to-emerald-500/20 border border-green-500/30 rounded-2xl p-4">
+                                      <p className="text-sm text-green-400 font-semibold">Invoice sent</p>
+                                      <p className="text-xs text-gray-400 mt-1">Payment link included</p>
+                                    </div>
+                                  </>
+                                )}
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-
                   </div>
                 </div>
               </div>

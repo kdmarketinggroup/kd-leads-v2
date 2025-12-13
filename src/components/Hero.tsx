@@ -44,37 +44,44 @@ const Hero = () => {
 
             {/* CTA BUTTONS */}
             <div className="flex flex-wrap items-center gap-4 mb-12">
-              {/* App Store */}
-              <a
-                href="https://apps.apple.com/in/app/kd-leads/id6743548012"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 px-6 py-4 rounded-xl bg-[#d4af77] text-black font-semibold hover:scale-[1.03] transition"
-              >
-                <Apple className="w-5 h-5" />
-                App Store
-              </a>
+  {/* Apple */}
+  <a
+    href="https://apps.apple.com/in/app/kd-leads/id6743548012"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="hover:scale-[1.03] transition"
+  >
+    <img
+      src="/badges/appstore.svg"
+      alt="Download on the App Store"
+      className="h-[56px]"
+    />
+  </a>
 
-              {/* Google Play */}
-              <a
-                href="https://play.google.com/store/apps/details?id=com.kdleads"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 px-6 py-4 rounded-xl bg-white/5 border border-white/10 font-semibold hover:bg-white/10 transition"
-              >
-                <Play className="w-5 h-5" />
-                Google Play
-              </a>
+  {/* Google Play */}
+  <a
+    href="https://play.google.com/store/apps/details?id=com.kdleads"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="hover:scale-[1.03] transition"
+  >
+    <img
+      src="/badges/googleplay.svg"
+      alt="Get it on Google Play"
+      className="h-[56px]"
+    />
+  </a>
 
-              {/* Onboarding */}
-              <a
-                href="/onboarding"
-                className="flex items-center gap-3 px-6 py-4 rounded-xl border border-[#d4af77]/40 text-[#d4af77] font-semibold hover:bg-[#d4af77]/10 transition"
-              >
-                <ArrowRight className="w-5 h-5" />
-                Start Onboarding
-              </a>
-            </div>
+  {/* Onboarding CTA */}
+  <a
+    href="/onboarding"
+    className="flex items-center gap-3 px-6 py-4 rounded-xl border border-[#d4af77]/40 text-[#d4af77] font-semibold hover:bg-[#d4af77]/10 transition"
+  >
+    <span className="text-lg">✨</span>
+    Start Onboarding
+  </a>
+</div>
+
 
             {/* STATS */}
             <div className="grid grid-cols-3 gap-6 max-w-lg">

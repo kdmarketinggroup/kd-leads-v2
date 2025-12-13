@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const FEATURES = [
@@ -21,8 +21,15 @@ const FinalCTA = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [progress, setProgress] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const [dragY, setDragY] = useState(0);
+
+  const activeSlug = location.pathname.startsWith("/features/")
+    ? location.pathname.split("/features/")[1]
+    : null;
+
+  const activeFeature = FEATURES.find(f => f.slug === activeSlug);
 
   /* ---------------- Scroll tracking ---------------- */
   useEffect(() => {
@@ -41,31 +48,34 @@ const FinalCTA = () => {
     return () => slider.removeEventListener("scroll", onScroll);
   }, []);
 
-  /* ---------------- Deep link support ---------------- */
+  /* ---------------- Deep link scroll ---------------- */
   useEffect(() => {
-    if (!sliderRef.current) return;
+    if (!sliderRef.current || !activeFeature) return;
 
-    const slug = location.pathname.split("/features/")[1];
-    if (!slug) return;
+    const index = FEATURES.findIndex(f => f.slug === activeFeature.slug);
+    const cardWidth = sliderRef.current.scrollWidth / FEATURES.length;
 
-    const index = FEATURES.findIndex(f => f.slug === slug);
-    if (index === -1) return;
-
-    const slider = sliderRef.current;
-    const cardWidth = slider.scrollWidth / FEATURES.length;
-
-    slider.scrollTo({
+    sliderRef.current.scrollTo({
       left: cardWidth * index,
       behavior: "smooth"
     });
 
     setActiveIndex(index);
-  }, [location.pathname]);
+  }, [activeSlug]);
 
-  /* ---------------- Arrow navigation ---------------- */
+  /* ---------------- ESC to close ---------------- */
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") navigate("/");
+    };
+
+    if (activeFeature) window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [activeFeature]);
+
+  /* ---------------- Arrow nav ---------------- */
   const scrollByCard = (dir: "left" | "right") => {
     if (!sliderRef.current) return;
-
     const cardWidth = sliderRef.current.scrollWidth / FEATURES.length;
 
     sliderRef.current.scrollBy({
@@ -93,61 +103,30 @@ const FinalCTA = () => {
             KD Leads
           </span>
         </h2>
-        <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-          Swipe, scroll, or click through each feature that helps you close faster and grow smarter.
-        </p>
       </div>
 
-      {/* Arrow buttons */}
-      <button
-        onClick={() => scrollByCard("left")}
-        className="hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-black/60 border border-white/10 items-center justify-center hover:bg-black transition"
-      >
+      {/* Arrows */}
+      <button onClick={() => scrollByCard("left")} className="hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-black/60 border border-white/10 items-center justify-center">
         <ChevronLeft />
       </button>
-
-      <button
-        onClick={() => scrollByCard("right")}
-        className="hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-black/60 border border-white/10 items-center justify-center hover:bg-black transition"
-      >
+      <button onClick={() => scrollByCard("right")} className="hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 rounded-full bg-black/60 border border-white/10 items-center justify-center">
         <ChevronRight />
       </button>
 
       {/* Carousel */}
-      <div
-        ref={sliderRef}
-        className="flex gap-10 overflow-x-scroll px-6 pb-12 snap-x snap-mandatory scroll-smooth"
-        style={{ scrollbarWidth: "none" }}
-      >
+      <div ref={sliderRef} className="flex gap-10 overflow-x-scroll px-6 pb-12 snap-x snap-mandatory scroll-smooth">
         {FEATURES.map((item, i) => (
           <motion.div
             key={item.slug}
+            layoutId={`card-${item.slug}`}
             onClick={() => navigate(`/features/${item.slug}`)}
-            className="min-w-[300px] md:min-w-[420px] snap-center cursor-pointer"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            className="min-w-[320px] md:min-w-[420px] snap-center cursor-pointer"
           >
             <motion.div
-              animate={{
-                scale: i === activeIndex ? 1.05 : 0.95,
-                boxShadow:
-                  i === activeIndex
-                    ? "0 0 40px rgba(212,175,119,0.35)"
-                    : "none"
-              }}
-              transition={{ type: "spring", stiffness: 200, damping: 25 }}
+              animate={{ scale: i === activeIndex ? 1.05 : 0.95 }}
               className="bg-gradient-to-br from-gray-900/80 to-black/80 border border-white/10 rounded-3xl overflow-hidden"
             >
-              <div className="relative h-64 bg-white/5">
-                <img
-                  src={item.img}
-                  alt={item.title}
-                  loading="lazy"
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-              </div>
-
+              <img src={item.img} className="h-64 w-full object-cover" />
               <div className="p-6">
                 <h3 className="text-xl font-bold mb-2">{item.title}</h3>
                 <p className="text-sm text-gray-400">{item.desc}</p>
@@ -156,6 +135,45 @@ const FinalCTA = () => {
           </motion.div>
         ))}
       </div>
+
+      {/* FULLSCREEN FEATURE */}
+      <AnimatePresence>
+        {activeFeature && (
+          <motion.div
+            className="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl flex items-center justify-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => navigate("/")}
+          >
+            <motion.div
+              layoutId={`card-${activeFeature.slug}`}
+              drag="y"
+              dragConstraints={{ top: 0, bottom: 0 }}
+              onDragEnd={(_, info) => info.offset.y > 150 && navigate("/")}
+              onDrag={(_, info) => setDragY(info.offset.y)}
+              className="relative bg-black rounded-3xl max-w-6xl w-full mx-6 overflow-hidden"
+              style={{ y: dragY }}
+              onClick={e => e.stopPropagation()}
+            >
+              <img src={activeFeature.img} className="w-full max-h-[70vh] object-contain" />
+
+              {/* Description Panel */}
+              <div className="p-8 bg-gradient-to-t from-black/90 to-black/40">
+                <h3 className="text-3xl font-bold mb-4">{activeFeature.title}</h3>
+                <p className="text-gray-400 max-w-2xl">{activeFeature.desc}</p>
+              </div>
+
+              <button
+                className="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/60 border border-white/10 flex items-center justify-center"
+                onClick={() => navigate("/")}
+              >
+                <X />
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

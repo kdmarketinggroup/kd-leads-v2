@@ -78,24 +78,32 @@ const ThreeSteps: React.FC = () => {
         </div>
 
         <div className="text-center fade-up">
-          <button
-            className="group px-10 py-5 bg-gradient-to-r from-[#d4af77] to-[#b88a4a] rounded-2xl font-bold text-lg hover:shadow-2xl hover:shadow-[#d4af77]/50 transition-all duration-300 inline-flex items-center gap-3"
-            aria-label="Start onboarding with KD Leads"
-          >
-            Start onboarding
-            <svg
-              className="w-5 h-5 transform group-hover:translate-x-1 transition-transform"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden
-            >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-            </svg>
-          </button>
+  <a
+    href="https://onboardingplan.netlify.app/"
+    className="group px-10 py-5 bg-gradient-to-r from-[#d4af77] to-[#b88a4a] rounded-2xl font-bold text-lg hover:shadow-2xl hover:shadow-[#d4af77]/50 transition-all duration-300 inline-flex items-center gap-3"
+    aria-label="Start onboarding with KD Leads"
+  >
+    Start onboarding
+    <svg
+      className="w-5 h-5 transform group-hover:translate-x-1 transition-transform"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+      aria-hidden
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M13 7l5 5m0 0l-5 5m5-5H6"
+      />
+    </svg>
+  </a>
 
-          <p className="text-sm text-gray-500 mt-4">No credit card required • Free to get started</p>
-        </div>
+  <p className="text-sm text-gray-500 mt-4">
+    Cancel anytime | Upgrade at will
+  </p>
+</div>
       </div>
     </section>
   );

@@ -74,7 +74,7 @@ const Hero = () => {
 
   {/* Onboarding CTA */}
   <a
-    href="/onboarding"
+    href="https://onboardingplan.netlify.app/"
     className="flex items-center gap-3 px-6 py-4 rounded-xl border border-[#d4af77]/40 text-[#d4af77] font-semibold hover:bg-[#d4af77]/10 transition"
   >
     <span className="text-lg">✨</span>
